@@ -27,7 +27,6 @@ public class GithubService {
         } catch (Exception e) {
             throw new UserNotFoundException("User '" + username + "' not found.");
         }
-
         if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
             throw new UserNotFoundException("User '" + username + "' not found.");
         }
@@ -37,5 +36,21 @@ public class GithubService {
         if (reposArray == null) return Collections.emptyList();
 
         return Arrays.asList(reposArray);
+    }
+
+    public List<BranchDto> getBranches(String url) {
+
+        ResponseEntity<BranchDto[]> response;
+        try {
+            response = restTemplate.getForEntity(url, BranchDto[].class);
+        } catch (Exception e) {
+            throw new UserNotFoundException("Branches not found.");
+        }
+
+        BranchDto[] branchesArray = response.getBody();
+
+        if (branchesArray == null) return Collections.emptyList();
+
+        return Arrays.asList(branchesArray);
     }
 }
