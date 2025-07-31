@@ -1,9 +1,7 @@
-package dev.salonce.atiperatask;
+package dev.salonce.atiperatask.Dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GithubRepositoryDto {
@@ -15,6 +13,9 @@ public class GithubRepositoryDto {
 
     @JsonProperty("branches_url")
     private String branchesUrl;
+
+    @JsonProperty("fork")
+    private Boolean fork;
 
     public GithubRepositoryDto() {}
 
@@ -34,5 +35,9 @@ public class GithubRepositoryDto {
 
     public String getBranchesUrl() {
         return branchesUrl;
+    }
+
+    public Boolean getFork() {
+        return fork;
     }
 }

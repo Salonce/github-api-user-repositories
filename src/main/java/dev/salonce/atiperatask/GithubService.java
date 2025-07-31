@@ -1,16 +1,15 @@
 package dev.salonce.atiperatask;
 
+import dev.salonce.atiperatask.Dtos.BranchDto;
+import dev.salonce.atiperatask.Dtos.GithubRepositoryDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class GithubService {
@@ -53,4 +52,8 @@ public class GithubService {
 
         return Arrays.asList(branchesArray);
     }
+//
+//    public List<RepositoryInformation> getRepositoriesInformation(String username){
+//        List<GithubRepositoryDto> userGithubRepos = getUserRepositories(username);
+//    }
 }

@@ -1,5 +1,6 @@
 package dev.salonce.atiperatask;
 
+import dev.salonce.atiperatask.Dtos.GithubRepositoryDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
