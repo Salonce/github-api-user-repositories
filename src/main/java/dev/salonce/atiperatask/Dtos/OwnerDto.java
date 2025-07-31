@@ -1,4 +1,4 @@
-package dev.salonce.atiperatask;
+package dev.salonce.atiperatask.Dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -10,9 +10,5 @@ public class OwnerDto {
 
     public String getLogin() {
         return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 }

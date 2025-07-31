@@ -1,4 +1,4 @@
-package dev.salonce.atiperatask;
+package dev.salonce.atiperatask.Dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +9,7 @@ public class BranchDto {
     private String name;
 
     @JsonProperty("commit")
-    private CommitDto commit;
+    private CommitDto commitDto;
 
     public BranchDto() {}
 
@@ -17,7 +17,7 @@ public class BranchDto {
         return name;
     }
 
-    public String getLastCommitSha() {
-        return commit != null ? commit.getSha() : null;
+    public CommitDto getCommitDto(){
+        return commitDto;
     }
 }
