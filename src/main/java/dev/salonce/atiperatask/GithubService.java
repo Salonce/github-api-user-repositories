@@ -2,9 +2,11 @@ package dev.salonce.atiperatask;
 
 import dev.salonce.atiperatask.Dtos.BranchDto;
 import dev.salonce.atiperatask.Dtos.GithubRepositoryDto;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import dev.salonce.atiperatask.Exceptions.UserNotFoundException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -15,45 +17,66 @@ import java.util.List;
 @Service
 public class GithubService {
 
+    @Value("${github.token}")
+    private String githubToken;
+
     private final RestTemplate restTemplate = new RestTemplate();
     private final String GITHUB_API = "https://api.github.com";
 
     private List<GithubRepositoryDto> getUserRepositories(String username) {
         String url = GITHUB_API + "/users/" + username + "/repos";
 
-        ResponseEntity<GithubRepositoryDto[]> response;
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + githubToken);
+        headers.set("Accept", "application/vnd.github+json"); // Recommended by GitHub
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
         try {
-            response = restTemplate.getForEntity(url, GithubRepositoryDto[].class);
-        } catch (Exception e) {
+            ResponseEntity<GithubRepositoryDto[]> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    entity,
+                    GithubRepositoryDto[].class
+            );
+
+            GithubRepositoryDto[] reposArray = response.getBody();
+            if (reposArray == null) return Collections.emptyList();
+            return Arrays.asList(reposArray);
+        } catch (HttpClientErrorException.NotFound e) {
             throw new UserNotFoundException("User '" + username + "' not found.");
         }
-        if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
-            throw new UserNotFoundException("User '" + username + "' not found.");
-        }
-
-        GithubRepositoryDto[] reposArray = response.getBody();
-
-        if (reposArray == null) return Collections.emptyList();
-
-        return Arrays.asList(reposArray);
     }
 
     private List<BranchDto> getBranches(String url) {
-        ResponseEntity<BranchDto[]> response;
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + githubToken);
+        headers.set("Accept", "application/vnd.github+json");
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
         try {
-            response = restTemplate.getForEntity(url, BranchDto[].class);
-        } catch (Exception e) {
+            ResponseEntity<BranchDto[]> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    entity,
+                    BranchDto[].class
+            );
+
+            BranchDto[] branchesArray = response.getBody();
+            if (branchesArray == null) return Collections.emptyList();
+            return Arrays.asList(branchesArray);
+        } catch (HttpClientErrorException.NotFound e) {
             throw new UserNotFoundException("Branches not found.");
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching branches: " + e.getMessage(), e);
         }
-
-        BranchDto[] branchesArray = response.getBody();
-
-        if (branchesArray == null) return Collections.emptyList();
-
-        return Arrays.asList(branchesArray);
     }
 
+
     public List<RepositoryInformation> getRepositoriesInformation(String username){
+        //System.out.println("GITHUB TOKEN:::::::::" + githubToken);
+
         List<GithubRepositoryDto> userGithubRepos = getUserRepositories(username);
 
         List<RepositoryInformation> repositoryInformationList = new ArrayList<>();
@@ -79,4 +102,36 @@ public class GithubService {
         }
         return repositoryInformationList;
     }
+
+
+//    private List<BranchDto> getBranches(String url) {
+//        ResponseEntity<BranchDto[]> response;
+//        try {
+//            response = restTemplate.getForEntity(url, BranchDto[].class);
+//        } catch (Exception e) {
+//            throw new UserNotFoundException("Branches not found.");
+//        }
+//
+//        BranchDto[] branchesArray = response.getBody();
+//
+//        if (branchesArray == null) return Collections.emptyList();
+//
+//        return Arrays.asList(branchesArray);
+//    }
+
+
+//    private List<GithubRepositoryDto> getUserRepositories(String username) {
+//        String url = GITHUB_API + "/users/" + username + "/repos";
+//
+//        ResponseEntity<GithubRepositoryDto[]> response;
+//        try {
+//            response = restTemplate.getForEntity(url, GithubRepositoryDto[].class);
+//            GithubRepositoryDto[] reposArray = response.getBody();
+//            if (reposArray == null) return Collections.emptyList();
+//            return Arrays.asList(reposArray);
+//        } catch (HttpClientErrorException.NotFound e) {
+//            throw new UserNotFoundException("User '" + username + "' not found.");
+//        }
+//    }
+
 }
