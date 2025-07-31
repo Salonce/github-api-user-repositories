@@ -17,7 +17,7 @@ public class MainController {
     }
 
     @GetMapping("/user/{username}/repositories")
-    public List<GithubRepositoryDto> getNonForkRepositories(@PathVariable String username) {
-        return githubService.getUserRepositories(username);
+    public List<RepositoryInformation> getNonForkRepositories(@PathVariable String username) {
+        return githubService.getRepositoriesInformation(username);
     }
 }
