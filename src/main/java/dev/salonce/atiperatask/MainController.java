@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-
 public class MainController {
     private final GithubService githubService;
 
@@ -16,7 +15,7 @@ public class MainController {
         this.githubService = githubService;
     }
 
-    @GetMapping("/user/{username}/repositories")
+    @GetMapping("/users/{username}/repositories")
     public List<RepositoryInformation> getNonForkRepositories(@PathVariable String username) {
         return githubService.getRepositoriesInformation(username);
     }
