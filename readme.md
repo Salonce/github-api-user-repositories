@@ -1,13 +1,13 @@
 # GitHub Repositories Branch Viewer API 🔍🐙
 
-A Spring Boot application that exposes a REST endpoint to fetch data about **non-fork** repositories for a given GitHub user. The data includes the name of each repository, the owner login and data about branches (name of each branch and last commit SHAs).
+A Spring Boot application that exposes a REST endpoint to fetch data about user repositories.
 
 ## ✨ Features
 
 - Fetches public repositories for a GitHub username.
 - Filters out forked repositories.
-- For each githubRepository lists:
-  the name, owner login and all branches: their names and their latest SHA commits.
+- For each github repository it lists:
+  the name, owner login and data for each branch: its name and the latest SHA commit
 
 ---
 
