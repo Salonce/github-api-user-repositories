@@ -2,10 +2,10 @@ package dev.salonce.atiperatask;
 
 import java.util.List;
 
-public class RepositoryInformation {
+public class Repository {
     private String name;
 
-    public RepositoryInformation(String name, String owner_login, List<Branch> branches) {
+    public Repository(String name, String owner_login, List<Branch> branches) {
         this.name = name;
         this.owner_login = owner_login;
         this.branches = branches;
