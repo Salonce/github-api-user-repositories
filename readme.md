@@ -21,14 +21,14 @@ GET /users/{username}/repositories
 
 ## 🧠 Example
 
-Request:
+### Request:
 
 ```http
 GET /users/octocat/repositories
 ```
 
 
-Response:
+### Response:
 ```json
 [
     {
@@ -72,6 +72,22 @@ Response:
     // and so forth...
 ]
 ```
+
+
+## 🧯 Error Responses
+
+### User not found example :
+```
+GET /users/nonexistantuser/repositories
+```
+### Response:
+```json
+{
+"status": 404,
+"message": "User 'nonexistantuser' not found."
+}
+```
+
 
 ### ⚙️ Technologies Used
 - Java 21

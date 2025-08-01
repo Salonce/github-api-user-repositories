@@ -66,10 +66,9 @@ public class GithubService {
             BranchDto[] branchesArray = response.getBody();
             if (branchesArray == null) return Collections.emptyList();
             return Arrays.asList(branchesArray);
-        } catch (HttpClientErrorException.NotFound e) {
-            throw new UserNotFoundException("Branches not found.");
         } catch (Exception e) {
-            throw new RuntimeException("Error fetching branches: " + e.getMessage(), e);
+            System.out.println("Error fetching branches");
+            return List.of();
         }
     }
 
