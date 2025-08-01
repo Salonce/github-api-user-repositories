@@ -8,7 +8,7 @@ A Spring Boot application that exposes a REST endpoint to fetch **non-fork** rep
 
 - Fetches public repositories for a GitHub username.
 - Filters out forked repositories.
-- For each repository lists:
+- For each githubRepository lists:
   the name, owner login and all branches: their names and their latest SHA commits.
 
 ---

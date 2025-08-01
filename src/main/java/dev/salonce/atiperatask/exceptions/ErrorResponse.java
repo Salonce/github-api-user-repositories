@@ -1,4 +1,4 @@
-package dev.salonce.atiperatask.Exceptions;
+package dev.salonce.atiperatask.exceptions;
 
 public class ErrorResponse {
     private int status;

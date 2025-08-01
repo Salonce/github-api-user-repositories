@@ -1,4 +1,4 @@
-package dev.salonce.atiperatask;
+package dev.salonce.atiperatask.models;
 
 public class Branch {
 
@@ -7,8 +7,8 @@ public class Branch {
         this.sha = sha;
     }
 
-    private String name;
-    private String sha;
+    private final String name;
+    private final String sha;
 
     public String getName() {
         return name;

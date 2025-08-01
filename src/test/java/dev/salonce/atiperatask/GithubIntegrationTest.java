@@ -1,5 +1,7 @@
 package dev.salonce.atiperatask;
 
+import dev.salonce.atiperatask.models.Branch;
+import dev.salonce.atiperatask.models.GithubRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,17 +24,17 @@ class GithubApiIntegrationTest {
         String url = "/users/" + username + "/repositories";
 
         // WHEN
-        ResponseEntity<Repository[]> response =
-                restTemplate.getForEntity(url, Repository[].class);
+        ResponseEntity<GithubRepository[]> response =
+                restTemplate.getForEntity(url, GithubRepository[].class);
 
         // THEN
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        Repository[] repositories = response.getBody();
+        GithubRepository[] repositories = response.getBody();
         assertThat(repositories).withFailMessage("Program return null when trying to read octocat repositories.").isNotNull();
         assertThat(repositories.length).withFailMessage("Program found zero repositories for octocat, expected at least one.").isGreaterThan(0);
 
-        Repository firstRepo = repositories[0];
+        GithubRepository firstRepo = repositories[0];
         assertThat(firstRepo.getName())
                 .withFailMessage("First repository's name was blank or null, expected a valid name.")
                 .isNotBlank();

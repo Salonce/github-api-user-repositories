@@ -1,8 +1,10 @@
-package dev.salonce.atiperatask;
+package dev.salonce.atiperatask.services;
 
-import dev.salonce.atiperatask.Dtos.BranchDto;
-import dev.salonce.atiperatask.Dtos.GithubRepositoryDto;
-import dev.salonce.atiperatask.Exceptions.UserNotFoundException;
+import dev.salonce.atiperatask.dtos.BranchDto;
+import dev.salonce.atiperatask.dtos.GithubRepositoryDto;
+import dev.salonce.atiperatask.exceptions.UserNotFoundException;
+import dev.salonce.atiperatask.models.Branch;
+import dev.salonce.atiperatask.models.GithubRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -73,10 +75,10 @@ public class GithubService {
     }
 
 
-    public List<Repository> getRepositoriesInformation(String username){
+    public List<GithubRepository> getRepositoriesInformation(String username){
         List<GithubRepositoryDto> userGithubRepos = getUserRepositories(username);
 
-        List<Repository> repositoryList = new ArrayList<>();
+        List<GithubRepository> githubRepositoryList = new ArrayList<>();
         for(GithubRepositoryDto githubRepositoryDto : userGithubRepos){
             if (githubRepositoryDto.getFork()) continue;
 
@@ -84,7 +86,6 @@ public class GithubService {
             String ownerLogin = githubRepositoryDto.getOwner().getLogin();
 
             String branches_url = GITHUB_API + "/repos/" + username + "/" + name + "/branches";
-            System.out.println("Url: " + branches_url);
 
             List<BranchDto> branchDtos = getBranches(branches_url);
 
@@ -93,10 +94,10 @@ public class GithubService {
                 branches.add(new Branch(branchDto.getName(), branchDto.getCommitDto().getSha()));
             }
 
-            Repository repository = new Repository(name, ownerLogin, branches);
-            repositoryList.add(repository);
+            GithubRepository githubRepository = new GithubRepository(name, ownerLogin, branches);
+            githubRepositoryList.add(githubRepository);
         }
-        return repositoryList;
+        return githubRepositoryList;
     }
 
 
