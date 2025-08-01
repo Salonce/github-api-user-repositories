@@ -6,13 +6,13 @@ A Spring Boot application that exposes a REST endpoint to fetch **non-fork** rep
 Table of contents:
 ---
 
-- [Features](#features)
-- [API Endpoint](#api-endpoint)
-- [Example](#example)
-- [Error Responses](#error-responses)
-- [Technologies Used](#technologies-used)
-- [Prerequisites](#prerequisites-for-running-the-application)
-- [Running the Application](#run-via-maven)
+- [Features](#✨-features)
+- [API Endpoint](#🔗-api-endpoint)
+- [Example usage](#🧠-example-usage)
+- [Error Responses](#🧯-error-responses)
+- [Technologies Used](#⚙️-technologies-used)
+- [Prerequisites for running the application](#🚀-prerequisites-for-running-the-application)
+- [Run via Maven](#run-via-maven)
 - [Authentication](#authentication)
 
 ## ✨ Features
@@ -124,6 +124,3 @@ GET /users/nonexistantuser/repositories
 ```
 ./mvnw spring-boot:run
 ```
-
-### 🔐 Authentication
-If you hit GitHub API rate limits, consider adding a GitHub Personal Access Token for authenticated requests.
