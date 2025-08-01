@@ -1,18 +1,6 @@
 # GitHub Repositories Branch Viewer API 🔍🐙
 
-A Spring Boot application that exposes a REST endpoint to fetch **non-fork** repositories for a given GitHub user and their branches with commit SHAs.
-
-
-Table of contents:
----
-- [Features](#features)
-- [API Endpoint](#api-endpoint)
-- [Example](#example)
-- [Error Responses](#error-responses)
-- [Technologies Used](#technologies-used)
-- [Prerequisites](#prerequisites-for-running-the-application)
-- [Running the Application](#run-via-maven)
-- [Authentication](#authentication)
+A Spring Boot application that exposes a REST endpoint to fetch data about **non-fork** repositories for a given GitHub user. The data includes the name of each repository, the owner login and data about branches (name of each branch and last commit SHAs).
 
 ## ✨ Features
 
