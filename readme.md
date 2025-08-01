@@ -76,7 +76,7 @@ GET /users/octocat/repositories
 
 ## 🧯 Error Responses
 
-### User not found example :
+### User not found - example :
 ```
 GET /users/nonexistantuser/repositories
 ```
@@ -88,6 +88,14 @@ GET /users/nonexistantuser/repositories
 }
 ```
 
+### Any other error will result in this response:
+
+```json
+{
+  "status": 500,
+  "message": "Unexpected error occurred"
+}
+```
 
 ### ⚙️ Technologies Used
 - Java 21
