@@ -74,8 +74,6 @@ public class GithubService {
 
 
     public List<Repository> getRepositoriesInformation(String username){
-        //System.out.println("GITHUB TOKEN:::::::::" + githubToken);
-
         List<GithubRepositoryDto> userGithubRepos = getUserRepositories(username);
 
         List<Repository> repositoryList = new ArrayList<>();
@@ -83,8 +81,7 @@ public class GithubService {
             if (githubRepositoryDto.getFork()) continue;
 
             String name = githubRepositoryDto.getName();
-            String owner_login = githubRepositoryDto.getOwner().getLogin();
-            //String branches_url = githubRepositoryDto.getBranchesUrl();
+            String ownerLogin = githubRepositoryDto.getOwner().getLogin();
 
             String branches_url = GITHUB_API + "/repos/" + username + "/" + name + "/branches";
             System.out.println("Url: " + branches_url);
@@ -96,7 +93,7 @@ public class GithubService {
                 branches.add(new Branch(branchDto.getName(), branchDto.getCommitDto().getSha()));
             }
 
-            Repository repository = new Repository(name, owner_login, branches);
+            Repository repository = new Repository(name, ownerLogin, branches);
             repositoryList.add(repository);
         }
         return repositoryList;

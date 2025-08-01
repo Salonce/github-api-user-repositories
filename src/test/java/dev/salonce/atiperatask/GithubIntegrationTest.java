@@ -37,7 +37,7 @@ class GithubApiIntegrationTest {
                 .withFailMessage("First repository's name was blank or null, expected a valid name.")
                 .isNotBlank();
 
-        assertThat(firstRepo.getOwner_login())
+        assertThat(firstRepo.getOwnerLogin())
                 .withFailMessage("First repository owner login did not match 'octocat' (case insensitive).")
                 .isEqualToIgnoringCase("octocat");
 

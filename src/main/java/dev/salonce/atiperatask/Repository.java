@@ -5,21 +5,21 @@ import java.util.List;
 public class Repository {
     private String name;
 
-    public Repository(String name, String owner_login, List<Branch> branches) {
+    public Repository(String name, String ownerLogin, List<Branch> branches) {
         this.name = name;
-        this.owner_login = owner_login;
+        this.ownerLogin = ownerLogin;
         this.branches = branches;
     }
 
-    private String owner_login;
+    private String ownerLogin;
     private List<Branch> branches;
 
     public String getName() {
         return name;
     }
 
-    public String getOwner_login() {
-        return owner_login;
+    public String getOwnerLogin() {
+        return ownerLogin;
     }
 
     public List<Branch> getBranches() {
