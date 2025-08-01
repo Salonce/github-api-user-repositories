@@ -28,7 +28,7 @@ public class GithubService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + githubToken);
-        headers.set("Accept", "application/vnd.github+json"); // Recommended by GitHub
+        headers.set("Accept", "application/vnd.github+json");
 
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
@@ -73,12 +73,12 @@ public class GithubService {
     }
 
 
-    public List<RepositoryInformation> getRepositoriesInformation(String username){
+    public List<Repository> getRepositoriesInformation(String username){
         //System.out.println("GITHUB TOKEN:::::::::" + githubToken);
 
         List<GithubRepositoryDto> userGithubRepos = getUserRepositories(username);
 
-        List<RepositoryInformation> repositoryInformationList = new ArrayList<>();
+        List<Repository> repositoryList = new ArrayList<>();
         for(GithubRepositoryDto githubRepositoryDto : userGithubRepos){
             if (githubRepositoryDto.getFork()) continue;
 
@@ -96,10 +96,10 @@ public class GithubService {
                 branches.add(new Branch(branchDto.getName(), branchDto.getCommitDto().getSha()));
             }
 
-            RepositoryInformation repositoryInformation = new RepositoryInformation(name, owner_login, branches);
-            repositoryInformationList.add(repositoryInformation);
+            Repository repository = new Repository(name, owner_login, branches);
+            repositoryList.add(repository);
         }
-        return repositoryInformationList;
+        return repositoryList;
     }
 
 
