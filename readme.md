@@ -7,7 +7,7 @@ A Spring Boot application that exposes a REST endpoint to fetch data about user 
 - Fetches public repositories for a GitHub username.
 - Filters out forked repositories.
 - For each github repository it lists:
-  the name, owner login and data for each branch: its name and the latest SHA commit
+  the name, owner login and data for each branch: its name and the latest SHA commit.
 
 ---
 
