@@ -1,4 +1,4 @@
-package dev.salonce.atiperatask.Exceptions;
+package dev.salonce.atiperatask.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

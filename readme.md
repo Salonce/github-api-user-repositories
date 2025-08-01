@@ -1,15 +1,13 @@
 # GitHub Repositories Branch Viewer API 🔍🐙
 
-A Spring Boot application that exposes a REST endpoint to fetch **non-fork** repositories for a given GitHub user and their branches with commit SHAs.
-
----
+A Spring Boot application that exposes a REST endpoint to fetch data about user repositories.
 
 ## ✨ Features
 
-- Fetches public repositories for a GitHub username.
+- Fetches information about public repositories of a user.
 - Filters out forked repositories.
-- For each repository lists:
-  the name, owner login and all branches: their names and their latest SHA commits.
+- For each user's github repository lists:
+  the name, owner login and data for each branch: its name and the latest SHA commit.
 
 ---
 
@@ -19,7 +17,7 @@ A Spring Boot application that exposes a REST endpoint to fetch **non-fork** rep
 GET /users/{username}/repositories
 ```
 
-## 🧠 Example
+## 🧠 Example usage
 
 ### Request:
 
@@ -73,14 +71,13 @@ GET /users/octocat/repositories
 ]
 ```
 
-
 ## 🧯 Error Responses
 
-### User not found - example :
+#### User not found - example request:
 ```
 GET /users/nonexistantuser/repositories
 ```
-### Response:
+#### Response:
 ```json
 {
 "status": 404,
@@ -88,7 +85,7 @@ GET /users/nonexistantuser/repositories
 }
 ```
 
-### Any other error will result in this response:
+#### Other errors response:
 
 ```json
 {
@@ -104,16 +101,13 @@ GET /users/nonexistantuser/repositories
 - Jackson
 - GitHub REST API v3
 
-### 🚀 Running the Application
-Prerequisites
+### 🚀 Prerequisites for running the application
+
 - Java 21
-- Maven
+- Maven 3.9.3 or later
 - Internet access
 
 ### Run via Maven:
 ```
 ./mvnw spring-boot:run
 ```
-
-### 🔐 Authentication
-If you hit GitHub API rate limits, consider adding a GitHub Personal Access Token for authenticated requests.
