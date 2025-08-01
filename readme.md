@@ -2,7 +2,18 @@
 
 A Spring Boot application that exposes a REST endpoint to fetch **non-fork** repositories for a given GitHub user and their branches with commit SHAs.
 
+
+Table of contents:
 ---
+
+- [Features](#features)
+- [API Endpoint](#api-endpoint)
+- [Example](#example)
+- [Error Responses](#error-responses)
+- [Technologies Used](#technologies-used)
+- [Prerequisites](#prerequisites-for-running-the-application)
+- [Running the Application](#run-via-maven)
+- [Authentication](#authentication)
 
 ## ✨ Features
 
@@ -19,7 +30,7 @@ A Spring Boot application that exposes a REST endpoint to fetch **non-fork** rep
 GET /users/{username}/repositories
 ```
 
-## 🧠 Example
+## 🧠 Example usage
 
 ### Request:
 
@@ -73,14 +84,13 @@ GET /users/octocat/repositories
 ]
 ```
 
-
 ## 🧯 Error Responses
 
-### User not found - example :
+#### User not found - example request:
 ```
 GET /users/nonexistantuser/repositories
 ```
-### Response:
+#### Response:
 ```json
 {
 "status": 404,
@@ -88,7 +98,7 @@ GET /users/nonexistantuser/repositories
 }
 ```
 
-### Any other error will result in this response:
+#### Other errors response:
 
 ```json
 {
@@ -104,8 +114,8 @@ GET /users/nonexistantuser/repositories
 - Jackson
 - GitHub REST API v3
 
-### 🚀 Running the Application
-Prerequisites
+### 🚀 Prerequisites for running the application
+
 - Java 21
 - Maven
 - Internet access
