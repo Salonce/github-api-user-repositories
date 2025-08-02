@@ -45,7 +45,7 @@ public class GithubService {
                 .uri("/users/" + username + "/repos")
                 .retrieve()
                 .onStatus(HttpStatus.NOT_FOUND::equals, (status, response) -> {
-                    throw new UserNotFoundException(username);
+                    throw new UserNotFoundException("User " + username + " not found.");
                 })
                 .body(GithubRepositoryDto[].class);
         if (repos == null) return Collections.emptyList();
