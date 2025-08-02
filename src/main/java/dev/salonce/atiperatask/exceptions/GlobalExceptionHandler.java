@@ -16,6 +16,15 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(NullDataException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFound(NullDataException ex) {
+        return new ResponseEntity<>(
+                new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage()),
+                HttpStatus.NOT_FOUND
+        );
+    }
+
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralError(Exception ex) {
         return new ResponseEntity<>(
@@ -23,4 +32,6 @@ public class GlobalExceptionHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
+
+
 }
