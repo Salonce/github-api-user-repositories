@@ -60,16 +60,16 @@ public class GithubService {
 
         List<GithubRepository> githubRepositoryList = new ArrayList<>();
         for(GithubRepositoryDto githubRepositoryDto : userGithubRepos){
-            if (githubRepositoryDto.getFork()) continue;
+            if (githubRepositoryDto.fork()) continue;
 
-            String repoName = githubRepositoryDto.getName();
-            String ownerLogin = githubRepositoryDto.getOwner().getLogin();
+            String repoName = githubRepositoryDto.name();
+            String ownerLogin = githubRepositoryDto.ownerDto().login();
 
             List<BranchDto> branchDtos = getBranches(username, repoName);
 
             List<Branch> branches = new ArrayList<>();
             for (BranchDto branchDto : branchDtos){
-                branches.add(new Branch(branchDto.getName(), branchDto.getCommitDto().getSha()));
+                branches.add(new Branch(branchDto.name(), branchDto.commitDto().sha()));
             }
 
             GithubRepository githubRepository = new GithubRepository(repoName, ownerLogin, branches);
