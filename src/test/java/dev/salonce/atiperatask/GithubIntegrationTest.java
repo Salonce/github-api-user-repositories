@@ -43,9 +43,18 @@ class GithubIntegrationTest {
                                            "irrelevant_field": "irrelevant info",
                                          },
                                          {
-                                           "name": "demo-react-app",
+                                           "name": "sample-api2",
                                            "owner": {
                                              "login": "testuser02",
+                                             "irrelevant_field": "irrelevant info",
+                                           },
+                                           "fork": true,
+                                           "irrelevant_field": "irrelevant info",
+                                         },
+                                         {
+                                           "name": "sample-api3",
+                                           "owner": {
+                                             "login": "testuser01",
                                              "irrelevant_field": "irrelevant info",
                                            },
                                            "fork": true,
@@ -62,9 +71,38 @@ class GithubIntegrationTest {
                             [
                               {
                                 "name": "main",
-                                "commit": { "sha": "abc123" }
+                                "commit": { "sha": "mainsha123" }
+                              }
+                              {
+                                "name": "left",
+                                "commit": { "sha": "leftbranch123" }
                               }
                             ]
+                            """)));
+        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/repos/testuser/sample-api2/branches"))
+                .willReturn(WireMock.aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("""
+                            [
+                              {
+                                "name": "main",
+                                "commit": { "sha": "mainsha321" }
+                              }
+                              {
+                                "name": "right",
+                                "commit": { "sha": "rightbranch123" }
+                              }
+                              {
+                                "name": "middle",
+                                "commit": { "sha": "middlebranch123" }
+                              }
+                            ]
+                            """)));
+        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/repos/testuser/sample-api3/branches"))
+                .willReturn(WireMock.aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("""
+                            []
                             """)));
     }
 
