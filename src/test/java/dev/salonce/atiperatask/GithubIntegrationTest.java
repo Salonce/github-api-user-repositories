@@ -34,40 +34,28 @@ class GithubIntegrationTest {
                         .withBody("""
                                 [
                                       {
-                                           "id": 101010101,
                                            "name": "sample-api",
-                                           "full_name": "testuser01/sample-api",
-                                           "private": false,
                                            "owner": {
                                              "login": "testuser01",
-                                             "id": 10001,
-                                             "node_id": "MDQ6VXNlcjEwMDAx"
+                                             "irrelevant_field": "irrelevant info",
                                            },
-                                           "html_url": "https://github.com/testuser01/sample-api",
-                                           "description": "A sample REST API built with Spring Boot for testing purposes.",
                                            "fork": false,
-                                           "topics": ["spring", "api", "test"]
+                                           "irrelevant_field": "irrelevant info",
                                          },
                                          {
-                                           "id": 202020202,
                                            "name": "demo-react-app",
-                                           "full_name": "testuser02/demo-react-app",
-                                           "private": false,
                                            "owner": {
                                              "login": "testuser02",
-                                             "id": 10002,
-                                             "node_id": "MDQ6VXNlcjEwMDAy"
+                                             "irrelevant_field": "irrelevant info",
                                            },
-                                           "html_url": "https://github.com/testuser02/demo-react-app",
-                                           "description": "Demo React application for UI testing scenarios.",
                                            "fork": true,
-                                           "topics": ["react", "frontend", "demo"]
+                                           "irrelevant_field": "irrelevant info",
                                          }
                                     ]
                             """)));
 
         // Mock branches for non-fork repo
-        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/repos/testuser/repo1/branches"))
+        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/repos/testuser/sample-api/branches"))
                 .willReturn(WireMock.aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBody("""
