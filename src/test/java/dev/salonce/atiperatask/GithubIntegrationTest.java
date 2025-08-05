@@ -57,7 +57,7 @@ class GithubIntegrationTest {
                                              "login": "testuser01",
                                              "irrelevant_field": "irrelevant info",
                                            },
-                                           "fork": true,
+                                           "fork": false,
                                            "irrelevant_field": "irrelevant info",
                                          }
                                     ]
@@ -79,6 +79,7 @@ class GithubIntegrationTest {
                               }
                             ]
                             """)));
+        // forked repo - shouldn't appear
         WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/repos/testuser/sample-api2/branches"))
                 .willReturn(WireMock.aResponse()
                         .withHeader("Content-Type", "application/json")
@@ -87,14 +88,6 @@ class GithubIntegrationTest {
                               {
                                 "name": "main",
                                 "commit": { "sha": "mainsha321" }
-                              }
-                              {
-                                "name": "right",
-                                "commit": { "sha": "rightbranch123" }
-                              }
-                              {
-                                "name": "middle",
-                                "commit": { "sha": "middlebranch123" }
                               }
                             ]
                             """)));
@@ -116,16 +109,23 @@ class GithubIntegrationTest {
                 .json("""
                 [
                   {
-                    "name": "repo1",
-                    "owner_login": "testuser",
+                    "name": "sample-api",
+                    "owner_login": "testuser01",
                     "branches": [
                       {
                         "name": "main",
-                        "commitDto": {
-                          "sha": "abc123"
-                        }
+                        "sha": "mainsha123"
+                      },
+                      {
+                        "name": "left",
+                        "sha": "leftbranch123"
                       }
                     ]
+                  },
+                  {
+                    "name": "sample-api3",
+                    "owner_login": "testuser01",
+                    "branches": []
                   }
                 ]
                 """, true); // true = strict mode in JSONAssert
