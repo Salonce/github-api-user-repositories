@@ -18,9 +18,9 @@ import java.util.List;
 @Service
 public class GithubService {
 
-    public GithubService(RestClient.Builder restClientBuilder, @Value("${github.token}") String githubToken){
+    public GithubService(RestClient.Builder restClientBuilder, @Value("${github.token}") String githubToken, @Value("${github.base-url}") String githubBaseUrl){
         this.restClient = restClientBuilder
-                .baseUrl("https://api.github.com")
+                .baseUrl(githubBaseUrl)
                 .defaultHeader("Authorization", "Bearer " + githubToken)
                 .defaultHeader("Accept", "application/vnd.github.v3+json")
                 .build();

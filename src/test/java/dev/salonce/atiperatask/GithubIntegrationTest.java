@@ -2,22 +2,27 @@ package dev.salonce.atiperatask;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 @ActiveProfiles("test")
-@AutoConfigureWireMock(port = 0) // Random port for mocking GitHub
+@WireMockTest(httpPort = 8081)
 class GithubIntegrationTest {
+
+    @DynamicPropertySource
+    static void configure(DynamicPropertyRegistry registry) {
+        registry.add("github.base-url", () -> "http://localhost:8081");
+    }
 
     @Autowired
     private WebTestClient webTestClient;
@@ -30,6 +35,7 @@ class GithubIntegrationTest {
         // Mock GitHub API call
         WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/users/testuser/repos"))
                 .willReturn(WireMock.aResponse()
+                        .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody("""
                                 [
@@ -37,28 +43,28 @@ class GithubIntegrationTest {
                                            "name": "sample-api",
                                            "owner": {
                                              "login": "testuser01",
-                                             "irrelevant_field": "irrelevant info",
+                                             "irrelevant_field": "irrelevant info"
                                            },
                                            "fork": false,
-                                           "irrelevant_field": "irrelevant info",
+                                           "irrelevant_field": "irrelevant info"
                                          },
                                          {
                                            "name": "sample-api2",
                                            "owner": {
                                              "login": "testuser02",
-                                             "irrelevant_field": "irrelevant info",
+                                             "irrelevant_field": "irrelevant info"
                                            },
                                            "fork": true,
-                                           "irrelevant_field": "irrelevant info",
+                                           "irrelevant_field": "irrelevant info"
                                          },
                                          {
                                            "name": "sample-api3",
                                            "owner": {
                                              "login": "testuser01",
-                                             "irrelevant_field": "irrelevant info",
+                                             "irrelevant_field": "irrelevant info"
                                            },
                                            "fork": false,
-                                           "irrelevant_field": "irrelevant info",
+                                           "irrelevant_field": "irrelevant info"
                                          }
                                     ]
                             """)));
@@ -66,13 +72,14 @@ class GithubIntegrationTest {
         // Mock branches for non-fork repo
         WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/repos/testuser/sample-api/branches"))
                 .willReturn(WireMock.aResponse()
+                        .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody("""
                             [
                               {
                                 "name": "main",
                                 "commit": { "sha": "mainsha123" }
-                              }
+                              },
                               {
                                 "name": "left",
                                 "commit": { "sha": "leftbranch123" }
@@ -82,6 +89,7 @@ class GithubIntegrationTest {
         // forked repo - shouldn't appear
         WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/repos/testuser/sample-api2/branches"))
                 .willReturn(WireMock.aResponse()
+                        .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody("""
                             [
@@ -93,6 +101,7 @@ class GithubIntegrationTest {
                             """)));
         WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/repos/testuser/sample-api3/branches"))
                 .willReturn(WireMock.aResponse()
+                        .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody("""
                             []
