@@ -8,14 +8,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-@ActiveProfiles("test")
 @WireMockTest(httpPort = 8081)
 class GithubIntegrationTest {
 
@@ -37,6 +35,7 @@ class GithubIntegrationTest {
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
+                        // language=JSON
                         .withBody("""
                                 [
                                       {
@@ -74,6 +73,7 @@ class GithubIntegrationTest {
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
+                        // language=JSON
                         .withBody("""
                             [
                               {
@@ -91,6 +91,7 @@ class GithubIntegrationTest {
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
+                        // language=JSON
                         .withBody("""
                             [
                               {
@@ -103,6 +104,7 @@ class GithubIntegrationTest {
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
+                        // language=JSON
                         .withBody("""
                             []
                             """)));
@@ -115,6 +117,7 @@ class GithubIntegrationTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
+                // language=JSON
                 .json("""
                 [
                   {
