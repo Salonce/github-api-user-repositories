@@ -25,7 +25,7 @@ public class GithubRestClient {
     }
     private final RestClient restClient;
 
-    public List<GithubRepositoryDto> getUserRepositories(String username) {
+    public List<GithubRepositoryDto> getRepositoriesDtos(String username) {
         GithubRepositoryDto[] repos = restClient
                 .get()
                 .uri("/users/" + username + "/repos")
@@ -38,7 +38,7 @@ public class GithubRestClient {
         return Arrays.asList(repos);
     }
 
-    public List<BranchDto> getBranches(String username, String repoName) {
+    public List<BranchDto> getBranchDtos(String username, String repoName) {
         BranchDto[] branchesArray = restClient
                 .get()
                 .uri("/repos/" + username + "/" + repoName + "/branches")

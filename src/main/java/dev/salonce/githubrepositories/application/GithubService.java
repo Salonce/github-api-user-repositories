@@ -1,34 +1,33 @@
 package dev.salonce.githubrepositories.application;
 
-import dev.salonce.githubrepositories.infrastructure.dtos.BranchDto;
-import dev.salonce.githubrepositories.infrastructure.dtos.GithubRepositoryDto;
 import dev.salonce.githubrepositories.presentation.dtos.Branch;
 import dev.salonce.githubrepositories.presentation.dtos.GithubRepository;
 import dev.salonce.githubrepositories.infrastructure.GithubRestClient;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class GithubService {
 
     public final GithubRestClient githubRestClient;
+    public final GithubMapper githubMapper;
 
-    public GithubService(GithubRestClient githubRestClient){
+    public GithubService(GithubRestClient githubRestClient, GithubMapper githubMapper){
         this.githubRestClient = githubRestClient;
+        this.githubMapper = githubMapper;
     }
 
     public List<GithubRepository> getRepositoriesInformation(String username){
-        return githubRestClient.getUserRepositories(username).stream()
+        return githubRestClient.getRepositoriesDtos(username).stream()
                 .filter(repoDto -> !repoDto.fork())
-                .map(repoDto -> new GithubRepository(repoDto.name(), repoDto.ownerDto().login(), getBranches(username, repoDto.name())))
+                .map(repoDto -> githubMapper.mapToGithubRepository(repoDto, getBranches(username, repoDto.name())))
                 .toList();
     }
 
     private List<Branch> getBranches(String username, String repoName) {
-        return githubRestClient.getBranches(username, repoName).stream()
-                .map(branchDto -> new Branch(branchDto.name(), branchDto.commitDto().sha()))
+        return githubRestClient.getBranchDtos(username, repoName).stream()
+                .map(githubMapper::mapToBranch)
                 .toList();
     }
 }
