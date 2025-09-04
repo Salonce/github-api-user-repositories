@@ -29,16 +29,48 @@ public class GithubService {
             String repoName = githubRepositoryDto.name();
             String ownerLogin = githubRepositoryDto.ownerDto().login();
 
-            List<BranchDto> branchDtos = githubRestClient.getBranches(username, repoName);
-
-            List<Branch> branches = new ArrayList<>();
-            for (BranchDto branchDto : branchDtos){
-                branches.add(new Branch(branchDto.name(), branchDto.commitDto().sha()));
-            }
+            List<Branch> branches = getBranches(username, repoName);
 
             GithubRepository githubRepository = new GithubRepository(repoName, ownerLogin, branches);
             githubRepositoryList.add(githubRepository);
         }
         return githubRepositoryList;
     }
+
+    public List<Branch> getBranches(String username, String repoName) {
+        List<BranchDto> branchDtos = githubRestClient.getBranches(username, repoName);
+
+        List<Branch> branches = new ArrayList<>();
+        for (BranchDto branchDto : branchDtos){
+            branches.add(new Branch(branchDto.name(), branchDto.commitDto().sha()));
+        }
+
+        return branches;
+    }
+
+//    public List<GithubRepository> getRepositoriesInformati(String username){
+//        githubRestClient.getUserRepositories(username).stream()
+//                .filter(dto -> !dto.fork())
+//                .map(dto -> githubRestClient.getBranches(dto.name(), dto.ownerDto().login()))
+//                .map(branchDto -> new Branch(branchDto))
+//
+//        //List<GithubRepository> githubRepositoryList = new ArrayList<>();
+//        //for(GithubRepositoryDto githubRepositoryDto : userGithubRepos){
+//        //    if (githubRepositoryDto.fork()) continue;
+//
+//        //    String repoName = githubRepositoryDto.name();
+//        //    String ownerLogin = githubRepositoryDto.ownerDto().login();
+//
+//        //    List<BranchDto> branchDtos = githubRestClient.getBranches(username, repoName);
+//
+//            List<Branch> branches = new ArrayList<>();
+//            for (BranchDto branchDto : branchDtos){
+//                branches.add(new Branch(branchDto.name(), branchDto.commitDto().sha()));
+//            }
+//
+//            GithubRepository githubRepository = new GithubRepository(repoName, ownerLogin, branches);
+//            githubRepositoryList.add(githubRepository);
+//        }
+//        return githubRepositoryList;
+//    }
 }
