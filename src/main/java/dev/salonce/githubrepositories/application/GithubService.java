@@ -26,7 +26,7 @@ public class GithubService {
                 .toList();
     }
 
-    public List<Branch> getBranches(String username, String repoName) {
+    private List<Branch> getBranches(String username, String repoName) {
         return githubRestClient.getBranches(username, repoName).stream()
                 .map(branchDto -> new Branch(branchDto.name(), branchDto.commitDto().sha()))
                 .toList();
