@@ -1,4 +1,4 @@
-# GitHub Repositories Branch Viewer API 🔍🐙
+# GitHub Repositories API 🔍
 
 A Spring Boot application that exposes a REST endpoint to fetch data about user repositories.
 
