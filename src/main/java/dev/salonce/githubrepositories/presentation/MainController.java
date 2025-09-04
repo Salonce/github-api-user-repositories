@@ -1,6 +1,6 @@
 package dev.salonce.githubrepositories.presentation;
 
-import dev.salonce.githubrepositories.models.GithubRepository;
+import dev.salonce.githubrepositories.domain.GithubRepository;
 import dev.salonce.githubrepositories.application.GithubService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
