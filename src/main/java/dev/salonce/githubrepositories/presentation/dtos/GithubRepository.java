@@ -1,4 +1,4 @@
-package dev.salonce.githubrepositories.domain;
+package dev.salonce.githubrepositories.presentation.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

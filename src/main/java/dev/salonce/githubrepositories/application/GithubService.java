@@ -2,8 +2,8 @@ package dev.salonce.githubrepositories.application;
 
 import dev.salonce.githubrepositories.infrastructure.dtos.BranchDto;
 import dev.salonce.githubrepositories.infrastructure.dtos.GithubRepositoryDto;
-import dev.salonce.githubrepositories.domain.Branch;
-import dev.salonce.githubrepositories.domain.GithubRepository;
+import dev.salonce.githubrepositories.presentation.dtos.Branch;
+import dev.salonce.githubrepositories.presentation.dtos.GithubRepository;
 import dev.salonce.githubrepositories.infrastructure.GithubRestClient;
 import org.springframework.stereotype.Service;
 

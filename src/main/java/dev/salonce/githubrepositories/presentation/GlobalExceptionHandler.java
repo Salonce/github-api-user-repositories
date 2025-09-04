@@ -3,6 +3,7 @@ package dev.salonce.githubrepositories.presentation;
 import dev.salonce.githubrepositories.infrastructure.exceptions.GithubBranchIsNullException;
 import dev.salonce.githubrepositories.infrastructure.exceptions.GithubRepositoryIsNullException;
 import dev.salonce.githubrepositories.infrastructure.exceptions.UserNotFoundException;
+import dev.salonce.githubrepositories.presentation.dtos.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
