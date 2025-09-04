@@ -1,4 +1,4 @@
-package dev.salonce.atiperatask;
+package dev.salonce.githubrepositories;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.client.WireMock;

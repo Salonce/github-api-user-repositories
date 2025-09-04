@@ -11,8 +11,8 @@
 	<groupId>dev.salonce</groupId>
 	<artifactId>atiperatask</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>atiperatask</name>
-	<description>Recrutation task from Atipera.</description>
+	<name>githubrepositories</name>
+	<description>Github repositories API.</description>
 	<url/>
 	<licenses>
 		<license/>
