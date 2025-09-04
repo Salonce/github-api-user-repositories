@@ -31,7 +31,7 @@ public class GithubRestClient {
                     throw new UserNotFoundException("User " + username + " not found.");
                 })
                 .body(GithubRepositoryDto[].class);
-        if (repos == null) throw new NullDataException("Incoming data is wrong. The repository returned a null value.");
+        if (repos == null) throw new GithubRepositoryIsNullException("Error. Github repository returned a null value.");
         return Arrays.asList(repos);
     }
 
@@ -41,7 +41,7 @@ public class GithubRestClient {
                 .uri("/repos/" + username + "/" + repoName + "/branches")
                 .retrieve()
                 .body(BranchDto[].class);
-        if (branchesArray == null) throw new NullDataException("Incoming data is wrong. Branches returned a null value.");
+        if (branchesArray == null) throw new GithubBranchIsNullException("Error. One of the repository branches returned a null value.");
         return Arrays.asList(branchesArray);
     }
 }

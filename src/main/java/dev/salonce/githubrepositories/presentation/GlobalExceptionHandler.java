@@ -1,6 +1,7 @@
 package dev.salonce.githubrepositories.presentation;
 
-import dev.salonce.githubrepositories.infrastructure.NullDataException;
+import dev.salonce.githubrepositories.infrastructure.GithubBranchIsNullException;
+import dev.salonce.githubrepositories.infrastructure.GithubRepositoryIsNullException;
 import dev.salonce.githubrepositories.infrastructure.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +19,21 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(NullDataException.class)
-    public ResponseEntity<ErrorResponse> handleUserNotFound(NullDataException ex) {
+    @ExceptionHandler(GithubRepositoryIsNullException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFound(GithubRepositoryIsNullException ex) {
         return new ResponseEntity<>(
-                new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage()),
+                new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Error. One of github repositories returned null value."),
                 HttpStatus.NOT_FOUND
         );
     }
 
+    @ExceptionHandler(GithubBranchIsNullException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFound(GithubBranchIsNullException ex) {
+        return new ResponseEntity<>(
+                new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Error. One of github branches returned a null value."),
+                HttpStatus.NOT_FOUND
+        );
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralError(Exception ex) {
@@ -34,6 +42,4 @@ public class GlobalExceptionHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
-
-
 }
