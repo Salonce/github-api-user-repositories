@@ -1,8 +1,8 @@
 package dev.salonce.githubrepositories.presentation;
 
-import dev.salonce.githubrepositories.infrastructure.GithubBranchIsNullException;
-import dev.salonce.githubrepositories.infrastructure.GithubRepositoryIsNullException;
-import dev.salonce.githubrepositories.infrastructure.UserNotFoundException;
+import dev.salonce.githubrepositories.infrastructure.exceptions.GithubBranchIsNullException;
+import dev.salonce.githubrepositories.infrastructure.exceptions.GithubRepositoryIsNullException;
+import dev.salonce.githubrepositories.infrastructure.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleUserNotFound(UserNotFoundException ex) {
         return new ResponseEntity<>(
-                new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage()),
+                new ErrorResponse(HttpStatus.NOT_FOUND.value(), "User " + ex.getUsername() + " not found."),
                 HttpStatus.NOT_FOUND
         );
     }
@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GithubRepositoryIsNullException.class)
     public ResponseEntity<ErrorResponse> handleUserNotFound(GithubRepositoryIsNullException ex) {
         return new ResponseEntity<>(
-                new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Error. One of github repositories returned null value."),
+                new ErrorResponse(HttpStatus.NOT_FOUND.value(), "An error occured while fetching data. One of github repositories returned null value."),
                 HttpStatus.NOT_FOUND
         );
     }
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GithubBranchIsNullException.class)
     public ResponseEntity<ErrorResponse> handleUserNotFound(GithubBranchIsNullException ex) {
         return new ResponseEntity<>(
-                new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Error. One of github branches returned a null value."),
+                new ErrorResponse(HttpStatus.NOT_FOUND.value(), "An error occured while fetching data. One of github branches returned a null value."),
                 HttpStatus.NOT_FOUND
         );
     }

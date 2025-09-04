@@ -2,6 +2,9 @@ package dev.salonce.githubrepositories.infrastructure;
 
 import dev.salonce.githubrepositories.infrastructure.dtos.BranchDto;
 import dev.salonce.githubrepositories.infrastructure.dtos.GithubRepositoryDto;
+import dev.salonce.githubrepositories.infrastructure.exceptions.GithubBranchIsNullException;
+import dev.salonce.githubrepositories.infrastructure.exceptions.GithubRepositoryIsNullException;
+import dev.salonce.githubrepositories.infrastructure.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,10 +31,10 @@ public class GithubRestClient {
                 .uri("/users/" + username + "/repos")
                 .retrieve()
                 .onStatus(HttpStatus.NOT_FOUND::equals, (status, response) -> {
-                    throw new UserNotFoundException("User " + username + " not found.");
+                    throw new UserNotFoundException(username);
                 })
                 .body(GithubRepositoryDto[].class);
-        if (repos == null) throw new GithubRepositoryIsNullException("Error. Github repository returned a null value.");
+        if (repos == null) throw new GithubRepositoryIsNullException();
         return Arrays.asList(repos);
     }
 
@@ -41,7 +44,7 @@ public class GithubRestClient {
                 .uri("/repos/" + username + "/" + repoName + "/branches")
                 .retrieve()
                 .body(BranchDto[].class);
-        if (branchesArray == null) throw new GithubBranchIsNullException("Error. One of the repository branches returned a null value.");
+        if (branchesArray == null) throw new GithubBranchIsNullException();
         return Arrays.asList(branchesArray);
     }
 }
