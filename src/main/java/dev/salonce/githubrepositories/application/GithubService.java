@@ -20,21 +20,10 @@ public class GithubService {
     }
 
     public List<GithubRepository> getRepositoriesInformation(String username){
-        List<GithubRepositoryDto> userGithubRepos = githubRestClient.getUserRepositories(username);
-
-        List<GithubRepository> githubRepositoryList = new ArrayList<>();
-        for(GithubRepositoryDto githubRepositoryDto : userGithubRepos){
-            if (githubRepositoryDto.fork()) continue;
-
-            String repoName = githubRepositoryDto.name();
-            String ownerLogin = githubRepositoryDto.ownerDto().login();
-
-            List<Branch> branches = getBranches(username, repoName);
-
-            GithubRepository githubRepository = new GithubRepository(repoName, ownerLogin, branches);
-            githubRepositoryList.add(githubRepository);
-        }
-        return githubRepositoryList;
+        return githubRestClient.getUserRepositories(username).stream()
+                .filter(repoDto -> !repoDto.fork())
+                .map(repoDto -> new GithubRepository(repoDto.name(), repoDto.ownerDto().login(), getBranches(username, repoDto.name())))
+                .toList();
     }
 
     public List<Branch> getBranches(String username, String repoName) {
