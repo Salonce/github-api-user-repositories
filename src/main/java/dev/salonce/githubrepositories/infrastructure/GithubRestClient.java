@@ -1,9 +1,7 @@
 package dev.salonce.githubrepositories.infrastructure;
 
-import dev.salonce.githubrepositories.dtos.BranchDto;
-import dev.salonce.githubrepositories.dtos.GithubRepositoryDto;
-import dev.salonce.githubrepositories.exceptions.NullDataException;
-import dev.salonce.githubrepositories.exceptions.UserNotFoundException;
+import dev.salonce.githubrepositories.infrastructure.dtos.BranchDto;
+import dev.salonce.githubrepositories.infrastructure.dtos.GithubRepositoryDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

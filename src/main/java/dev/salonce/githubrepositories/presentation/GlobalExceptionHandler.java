@@ -1,8 +1,7 @@
 package dev.salonce.githubrepositories.presentation;
 
-import dev.salonce.githubrepositories.exceptions.ErrorResponse;
-import dev.salonce.githubrepositories.exceptions.NullDataException;
-import dev.salonce.githubrepositories.exceptions.UserNotFoundException;
+import dev.salonce.githubrepositories.infrastructure.NullDataException;
+import dev.salonce.githubrepositories.infrastructure.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

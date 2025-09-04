@@ -1,4 +1,4 @@
-package dev.salonce.githubrepositories.exceptions;
+package dev.salonce.githubrepositories.infrastructure;
 
 public class NullDataException extends RuntimeException {
     public NullDataException (String message) {

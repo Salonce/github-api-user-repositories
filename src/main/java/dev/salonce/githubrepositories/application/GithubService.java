@@ -1,19 +1,13 @@
 package dev.salonce.githubrepositories.application;
 
-import dev.salonce.githubrepositories.dtos.BranchDto;
-import dev.salonce.githubrepositories.dtos.GithubRepositoryDto;
-import dev.salonce.githubrepositories.exceptions.NullDataException;
-import dev.salonce.githubrepositories.exceptions.UserNotFoundException;
+import dev.salonce.githubrepositories.infrastructure.dtos.BranchDto;
+import dev.salonce.githubrepositories.infrastructure.dtos.GithubRepositoryDto;
 import dev.salonce.githubrepositories.domain.Branch;
 import dev.salonce.githubrepositories.domain.GithubRepository;
 import dev.salonce.githubrepositories.infrastructure.GithubRestClient;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service

@@ -1,4 +1,4 @@
-package dev.salonce.githubrepositories.dtos;
+package dev.salonce.githubrepositories.infrastructure.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

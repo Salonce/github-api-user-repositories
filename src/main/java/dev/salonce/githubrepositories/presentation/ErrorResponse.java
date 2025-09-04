@@ -1,3 +1,3 @@
-package dev.salonce.githubrepositories.exceptions;
+package dev.salonce.githubrepositories.presentation;
 
 public record ErrorResponse(int status, String message) {}

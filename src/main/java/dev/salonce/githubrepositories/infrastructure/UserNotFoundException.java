@@ -1,4 +1,4 @@
-package dev.salonce.githubrepositories.exceptions;
+package dev.salonce.githubrepositories.infrastructure;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {
