@@ -1,4 +1,4 @@
-package dev.salonce.atiperatask.models;
+package dev.salonce.githubrepositories.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,11 +1,11 @@
-package dev.salonce.atiperatask.services;
+package dev.salonce.githubrepositories.application;
 
-import dev.salonce.atiperatask.dtos.BranchDto;
-import dev.salonce.atiperatask.dtos.GithubRepositoryDto;
-import dev.salonce.atiperatask.exceptions.NullDataException;
-import dev.salonce.atiperatask.exceptions.UserNotFoundException;
-import dev.salonce.atiperatask.models.Branch;
-import dev.salonce.atiperatask.models.GithubRepository;
+import dev.salonce.githubrepositories.dtos.BranchDto;
+import dev.salonce.githubrepositories.dtos.GithubRepositoryDto;
+import dev.salonce.githubrepositories.exceptions.NullDataException;
+import dev.salonce.githubrepositories.exceptions.UserNotFoundException;
+import dev.salonce.githubrepositories.models.Branch;
+import dev.salonce.githubrepositories.models.GithubRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

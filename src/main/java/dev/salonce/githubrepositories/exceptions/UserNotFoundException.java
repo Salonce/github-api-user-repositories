@@ -1,4 +1,4 @@
-package dev.salonce.atiperatask.exceptions;
+package dev.salonce.githubrepositories.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {
